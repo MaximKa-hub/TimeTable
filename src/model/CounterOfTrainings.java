@@ -1,6 +1,6 @@
 package model;
 
-public class CounterOfTrainings {
+public class CounterOfTrainings implements Comparable<CounterOfTrainings> {
     private final Coach coach;
     private final int count;
 
@@ -18,8 +18,12 @@ public class CounterOfTrainings {
     }
 
     @Override
-    public  String toString() {
-        return coach.getSurname() + " " + coach.getName() + " " + coach.getMiddleName() + ": " +
-                count + "тренировок";
+    public int compareTo(CounterOfTrainings other) {
+        return Integer.compare(other.count, this.count);
+    }
+
+    @Override
+    public String toString() {
+        return coach + ": " + count + "тренировок";
     }
 }

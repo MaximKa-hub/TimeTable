@@ -2,7 +2,7 @@ package model;
 
 import service.DayOfWeek;
 
-public class TrainingSession {
+public class TrainingSession implements Comparable<TrainingSession> {
 
     private Group group;
     private Coach coach;
@@ -30,5 +30,10 @@ public class TrainingSession {
 
     public TimeOfDay getTimeOfDay() {
         return timeOfDay;
+    }
+
+    @Override
+    public int compareTo(TrainingSession other) {
+        return this.timeOfDay.compareTo(other.timeOfDay);
     }
 }

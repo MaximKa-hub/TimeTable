@@ -108,4 +108,29 @@ public class TimetableTest {
 
         assertTrue(result.isEmpty());
     }
+
+    @Test
+    void testMultipleSessionsAtSameTime() {
+        Timetable timetable = new Timetable();
+
+        Coach coach1 = new Coach("Васильев", "Николай", "Сергеевич");
+        Coach coach2 = new Coach("Иванова", "Мария", "Петровна");
+
+        Group group1 = new Group("Акробатика для детей", Age.CHILD, 60);
+        Group group2 = new Group("Йога для взрослых", Age.ADULT, 60);
+
+        TimeOfDay sameTime = new TimeOfDay(10, 0);
+
+        TrainingSession session1 = new TrainingSession(group1, coach1, DayOfWeek.MONDAY, sameTime);
+        TrainingSession session2 = new TrainingSession(group2, coach2, DayOfWeek.MONDAY, sameTime);
+
+        timetable.addNewTrainingSession(session1);
+        timetable.addNewTrainingSession(session2);
+
+        List<TrainingSession> mondaySessions = timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY);
+
+        assertEquals(2, mondaySessions.size());
+        assertTrue(mondaySessions.contains(session1));
+        assertTrue(mondaySessions.contains(session2));
+    }
 }
